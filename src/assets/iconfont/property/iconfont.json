@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "160001",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "f0174",
+      "unicode_decimal": 983412
+    },
+    {
+      "icon_id": "324445",
+      "name": "iconfont-qiche",
+      "font_class": "iconfontqiche",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "611416",
+      "name": "book",
+      "font_class": "book",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "28019384",
+      "name": "信号-02",
+      "font_class": "xinhao-02",
+      "unicode": "e7a0",
+      "unicode_decimal": 59296
+    }
+  ]
+}
