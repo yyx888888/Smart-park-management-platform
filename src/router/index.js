@@ -1,14 +1,51 @@
-import { createRouter, createWebHistory } from 'vue-router' 
-const routes = [
- {
- path: '/',
- name: 'Home',
- component: () => import('../views/home.vue')
- }
+import { createRouter, createWebHashHistory } from 'vue-router' 
+const manageroutes = [
+   {
+      path: '/login',
+      name: 'Login',
+      component: () => import('../views/login.vue'),
+   },
+   {
+      path: '/',
+      name: '/',
+      component: () => import('../layout/index.vue'),
+      children:[
+      {
+            path: '/home',
+            name: 'home',
+            component: () => import('../views/home.vue'),
+      },
+      {
+         path: '/configuration',
+         name: 'configuration',
+         component: () => import('../views/configuration.vue'),
+      },
+      {
+         path: '/operation',
+         name: 'operation',
+         component: () => import('../views/operation.vue')
+      }, 
+      {
+         path: '/property',
+         name: 'property',
+         component: () => import('../views/property.vue')
+      },
+      {
+         path: '/visualization',
+         name: 'visualization',
+         component: () => import('../views/visualization.vue')
+      },
+      
+ ]
+ },
+
 ] 
+
+// 哈希路由
 const router = createRouter({
- history: createWebHistory("/"),
- routes: routes,
+   // 路由模式
+ history: createWebHashHistory(),
+ routes: manageroutes,
 }) 
 /**
 
