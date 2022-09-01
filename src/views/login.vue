@@ -1,8 +1,9 @@
-<!-- 综合态势 -->
+
 <template>
-  <div class="box1">
-      zhuye
-  </div>
+    <div>
+        登录
+
+    </div>
 </template>
 <script setup>
 </script>
@@ -10,5 +11,3 @@
 <style scoped>
 
 </style>
-
-
