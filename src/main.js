@@ -5,6 +5,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import '../src/styles/index.scss'
 import *as ElementPlusIconsVue from '@element-plus/icons-vue'
+import * as echarts from 'echarts'
 
 const app = createApp(App)
 
@@ -12,6 +13,9 @@ const app = createApp(App)
 Object.keys(ElementPlusIconsVue).forEach(key => {
     app.component(key, ElementPlusIconsVue[key])
   })
+
+  // 绑定实例
+app.config.globalProperties.$echarts = echarts
 
 app.use(router)
 app.use(ElementPlus)

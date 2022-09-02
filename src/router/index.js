@@ -13,7 +13,7 @@ const manageroutes = [
       {
             path: '/home',
             name: 'home',
-            component: () => import('../views/home.vue'),
+            component: () => import('../views/home/home.vue'),
       },
       {
          path: '/configuration',
