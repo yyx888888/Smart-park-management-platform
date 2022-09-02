@@ -110,8 +110,6 @@ const menuData = reactive([
   color: white;
 }
 .el-main {
-  margin: 0;
-  padding: 0;
   background-color: #eee;
 }
 .el-menu-item.is-active,
