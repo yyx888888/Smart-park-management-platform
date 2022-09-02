@@ -6,8 +6,7 @@ import 'element-plus/dist/index.css'
 import '../src/styles/index.scss'
 import *as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-// 引入物业侧边栏使用的字体图标
-import './assets/iconfont/property/iconfont.js'
+
 
 const app = createApp(App)
 
