@@ -10,15 +10,18 @@ import VChart from "vue-echarts";
 import { ref } from "vue";
 
 export default ({
-  name: "home",
   components: {
     VChart
   },
   setup: () => {
     const option = ref({
-      title: {
-        text: 'Stacked Area Chart'
-      },
+      // title: {
+      //   text: '当日能耗情况',
+      //   textStyle:{
+      //     color:'white',
+      //
+      //   }
+      // },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -29,12 +32,11 @@ export default ({
         }
       },
       legend: {
-        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {}
-        }
+        data: ['煤', '气', '油', '电', '热'],
+        textStyle:{
+          color: 'white'
+        },
+        lineHeight: 56
       },
       grid: {
         left: '3%',
@@ -46,57 +48,64 @@ export default ({
         {
           type: 'category',
           boundaryGap: false,
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          data: ['0', '4', '8', '12', '18', '24']
         }
       ],
       yAxis: [
         {
-          type: 'value'
+          type: 'value',
+          splitLine:{ //修改背景线条样式
+            show:true,//是否展示
+            lineStyle:{
+              color:"rgb(15,19,35,0.2)",//线条颜色
+            }
+          }
         }
       ],
+
       series: [
         {
-          name: 'Email',
+          name: '煤',
           type: 'line',
           stack: 'Total',
           areaStyle: {},
           emphasis: {
             focus: 'series'
           },
-          data: [120, 132, 101, 134, 90, 230, 210]
+          data: [120, 132, 101, 134, 90, 230]
         },
         {
-          name: 'Union Ads',
+          name: '气',
           type: 'line',
           stack: 'Total',
           areaStyle: {},
           emphasis: {
             focus: 'series'
           },
-          data: [220, 182, 191, 234, 290, 330, 310]
+          data: [220, 182, 191, 234, 290, 330]
         },
         {
-          name: 'Video Ads',
+          name: '油',
           type: 'line',
           stack: 'Total',
           areaStyle: {},
           emphasis: {
             focus: 'series'
           },
-          data: [150, 232, 201, 154, 190, 330, 410]
+          data: [150, 232, 201, 154, 190, 330]
         },
         {
-          name: 'Direct',
+          name: '电',
           type: 'line',
           stack: 'Total',
           areaStyle: {},
           emphasis: {
             focus: 'series'
           },
-          data: [320, 332, 301, 334, 390, 330, 320]
+          data: [320, 332, 301, 334, 390, 330]
         },
         {
-          name: 'Search Engine',
+          name: '热',
           type: 'line',
           stack: 'Total',
           label: {
@@ -107,7 +116,7 @@ export default ({
           emphasis: {
             focus: 'series'
           },
-          data: [820, 932, 901, 934, 1290, 1330, 1320]
+          data: [820, 932, 901, 934, 1290, 1330]
         }
       ]
     });
@@ -118,7 +127,7 @@ export default ({
 
 <style scoped>
 .chart {
-  height: 400px;
-  background-color: #0A3A7D;
+  height: 300px;
+
 }
 </style>

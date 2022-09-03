@@ -2,18 +2,38 @@
 <template>
   <div class="stateBox">
     <div class="column">
-      <dailyEnergy/>
-<!--      <VChart class="chart" :option="option"/>-->
-<!--      <div class="chart" :option="option"></div>-->
+      <div>
+        <div class="title">当日能耗情况</div>
+        <dailyEnergy/>
+        <div class="title">企业资质情况</div>
+        <qualification/>
+        <div class="title">服务统计</div>
+        <div class="carService">
+          <div>
 
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column">2</div>
+    <div class="column middleBox">
+      <img src="../../../public/images/stateBanner.png" alt="">
+      <div class="middleBottomBox">
+        <VChart class="chart" :option="option"/>
+      </div>
+    </div>
     <div class="column">
+      <div class="title">泊车情况</div>
+      <dailyEnergy/>
+      <div class="title">实时车辆信息</div>
+      <qualification/>
     </div>
   </div>
 </template>
 <script>
-import dailyEnergy from './DailyEnergy'
+import VChart from "vue-echarts";
+import { ref } from "vue";
+import dailyEnergy from './DailyEnergy.vue'
+import qualification from './Qualification.vue'
 export default ({
   data(){
     return {
@@ -21,117 +41,40 @@ export default ({
     }
   },
   components:{
-    dailyEnergy
+    VChart,
+    dailyEnergy,
+    qualification
+  },
+  setup: () => {
+    const option = ref({
+      xAxis: {
+        type: 'category',
+        data: ['在营', '已租', '出租', '续签', '新签', '待租', '退租'],
+        axisLabel:{
+          textStyle:{
+            color: '#fff'
+          }
+        }
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel : {
+          textStyle: {
+            color: '#fff'
+          }
+        }
+      },
+      series: [
+        {
+          data: [810, 280, 310, 480, 450, 800, 620],
+          type: 'bar'
+        }
+      ]
+    });
+    return { option };
   }
 })
-// import VChart from "vue-echarts";
-// import { ref } from "vue";
-//
-// export default ({
-//   // name: "home",
-//   components: {
-//     VChart
-//   },
-//   setup: () => {
-//     const option = ref({
-//       title: {
-//         text: 'Stacked Area Chart'
-//       },
-//       tooltip: {
-//         trigger: 'axis',
-//         axisPointer: {
-//           type: 'cross',
-//           label: {
-//             backgroundColor: '#6a7985'
-//           }
-//         }
-//       },
-//       legend: {
-//         data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
-//       },
-//       toolbox: {
-//         feature: {
-//           saveAsImage: {}
-//         }
-//       },
-//       grid: {
-//         left: '3%',
-//         right: '4%',
-//         bottom: '3%',
-//         containLabel: true
-//       },
-//       xAxis: [
-//         {
-//           type: 'category',
-//           boundaryGap: false,
-//           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-//         }
-//       ],
-//       yAxis: [
-//         {
-//           type: 'value'
-//         }
-//       ],
-//       series: [
-//         {
-//           name: 'Email',
-//           type: 'line',
-//           stack: 'Total',
-//           areaStyle: {},
-//           emphasis: {
-//             focus: 'series'
-//           },
-//           data: [120, 132, 101, 134, 90, 230, 210]
-//         },
-//         {
-//           name: 'Union Ads',
-//           type: 'line',
-//           stack: 'Total',
-//           areaStyle: {},
-//           emphasis: {
-//             focus: 'series'
-//           },
-//           data: [220, 182, 191, 234, 290, 330, 310]
-//         },
-//         {
-//           name: 'Video Ads',
-//           type: 'line',
-//           stack: 'Total',
-//           areaStyle: {},
-//           emphasis: {
-//             focus: 'series'
-//           },
-//           data: [150, 232, 201, 154, 190, 330, 410]
-//         },
-//         {
-//           name: 'Direct',
-//           type: 'line',
-//           stack: 'Total',
-//           areaStyle: {},
-//           emphasis: {
-//             focus: 'series'
-//           },
-//           data: [320, 332, 301, 334, 390, 330, 320]
-//         },
-//         {
-//           name: 'Search Engine',
-//           type: 'line',
-//           stack: 'Total',
-//           label: {
-//             show: true,
-//             position: 'top'
-//           },
-//           areaStyle: {},
-//           emphasis: {
-//             focus: 'series'
-//           },
-//           data: [820, 932, 901, 934, 1290, 1330, 1320]
-//         }
-//       ]
-//     });
-//     return { option };
-//   }
-// })
+
 </script>
 
 <style scoped>
@@ -139,20 +82,47 @@ export default ({
   display: flex;
   min-width: 1024px;
   max-width: 1920px;
-  height: 400px;
-  margin: 0 auto;
-  padding: 10px 10px 0;
+  padding: 10px;
   background-color: #2b3b5c;
 }
 .column{
-  flex: 3;
+  flex: 2.5;
+  background-color: #162a41;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  overflow: hidden;
 }
 :nth-child(2){
   flex: 5;
 }
-.chart {
+.title{
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #027db4;
+}
+.middleBox{
+  border: none;
+  background-color: rgba(10, 58, 125, 0);
+}
+img {
+  height: 500px;
+  margin-top: -10px;
+}
+.chart  {
   height: 400px;
-  background-color: #0A3A7D;
+}
+.middleBottomBox{
+  background-color: #162a41;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  margin-top: 20px;
 }
 </style>
 
