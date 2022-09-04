@@ -15,8 +15,8 @@ export default ({
   setup: () => {
     const option = ref({
       legend: {
-        textStyle:{
-          color:'white'
+        axisLabel:{
+          color:'#fff'
         }
       },
       tooltip: {},
@@ -35,16 +35,12 @@ export default ({
       xAxis: {
         type: 'category' ,
         axisLabel : {
-          textStyle: {
-            color: '#fff'
-          }
+          color: '#fff'
         }
       },
       yAxis: {
         axisLabel : {
-          textStyle: {
-            color: '#fff'
-          }
+          color: '#fff'
         },
         splitLine:{ //修改背景线条样式
           show:true,//是否展示
@@ -58,9 +54,7 @@ export default ({
         {
           type: 'bar',
           itemStyle:{
-            normal:{
-              color: '#ffa041'
-            }
+            color: '#ffa041'
           }
         },
       ]

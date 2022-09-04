@@ -15,13 +15,6 @@ export default ({
   },
   setup: () => {
     const option = ref({
-      // title: {
-      //   text: '当日能耗情况',
-      //   textStyle:{
-      //     color:'white',
-      //
-      //   }
-      // },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -33,8 +26,8 @@ export default ({
       },
       legend: {
         data: ['煤', '气', '油', '电', '热'],
-        textStyle:{
-          color: 'white'
+        axisLabel:{
+          color:'#fff'
         },
         lineHeight: 56
       },

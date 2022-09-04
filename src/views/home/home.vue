@@ -53,7 +53,7 @@
           <div class="value valueColor">1028</div>
         </div>
       </div>
-      <el-progress class="carChart" type="circle" :percentage="46" width="200" stroke-width="35" color="#ffa041" stroke-linecap="butt">
+      <el-progress class="carChart" type="circle" :percentage="46" :width="200" :stroke-width="35" color="#ffa041" stroke-linecap="butt">
         <template #default="{ percentage }">
           <span class="percentage-label">已使用</span>
           <span class="percentage-value">{{ percentage }}%</span>
@@ -61,7 +61,48 @@
         </template>
       </el-progress>
       <div class="title">实时车辆信息</div>
-      <qualification/>
+      <div class="carInfo">
+        <div class="carInfo-item">
+          <div class="carInfo-status">进场</div>
+          <div class="carInfo-number">川A223JK</div>
+          <div class="carInfo-time" >{{ this.confirmTime }}</div>
+        </div>
+        <div class="carInfo-item">
+          <div class="carInfo-status">进场</div>
+          <div class="carInfo-number">川A223JK</div>
+          <div class="carInfo-time" >{{ this.confirmTime }}</div>
+        </div>
+        <div class="carInfo-item">
+          <div class="carInfo-status">进场</div>
+          <div class="carInfo-number">川A223JK</div>
+          <div class="carInfo-time" >{{ this.confirmTime }}</div>
+        </div>
+        <div class="carInfo-item">
+          <div class="carInfo-status">进场</div>
+          <div class="carInfo-number">川A223JK</div>
+          <div class="carInfo-time" >{{ this.confirmTime }}</div>
+        </div>
+        <div class="carInfo-item">
+          <div class="carInfo-status">进场</div>
+          <div class="carInfo-number">川A223JK</div>
+          <div class="carInfo-time" >{{ this.confirmTime }}</div>
+        </div>
+        <div class="carInfo-item">
+          <div class="carInfo-status">进场</div>
+          <div class="carInfo-number">川A223JK</div>
+          <div class="carInfo-time" >{{ this.confirmTime }}</div>
+        </div>
+        <div class="carInfo-item">
+          <div class="carInfo-status">进场</div>
+          <div class="carInfo-number">川A223JK</div>
+          <div class="carInfo-time">{{ this.confirmTime }}</div>
+        </div>
+        <div class="carInfo-item">
+          <div class="carInfo-status">进场</div>
+          <div class="carInfo-number">川A223JK</div>
+          <div class="carInfo-time">{{ this.confirmTime }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -70,13 +111,24 @@ import VChart from "vue-echarts";
 import { ref } from "vue";
 import dailyEnergy from './DailyEnergy.vue'
 import qualification from './Qualification.vue'
+
 export default ({
   data(){
     return {
       servicedCount: 870,
       notServicedCount: 163,
-
+      nowDate(){
+        let nowDate=new Date();
+        let date={
+          hour:nowDate.getHours(),
+          min:nowDate.getMinutes()
+        };
+        this.confirmTime='今天'+date.hour+'：'+date.min
+      }
     }
+  },
+  created() {
+    this.nowDate();
   },
   computed:{
     percentage(){
@@ -91,22 +143,19 @@ export default ({
     qualification,
   },
   setup: () => {
+
     const option = ref({
       xAxis: {
         type: 'category',
         data: ['在营', '已租', '出租', '续签', '新签', '待租', '退租'],
         axisLabel:{
-          textStyle:{
-            color: '#fff'
-          }
+          color: '#fff'
         }
       },
       yAxis: {
         type: 'value',
         axisLabel : {
-          textStyle: {
-            color: '#fff'
-          }
+          color: '#fff'
         }
       },
       series: [
@@ -244,6 +293,35 @@ img {
 }
 .el-progress ::v-deep(path:first-child){
   stroke: #5080de;
+}
+.carInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.carInfo-item{
+  margin: 20px auto;
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.carInfo-status{
+  border: 2px solid #bfbf47;
+  border-radius: 5px;
+  color: #bfbf47;
+  width: 60px;
+  height: 30px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 30px;
+}
+.carInfo-number{
+  padding-left: 90px;
+  font-size: 20px;
+  color: #fff;
+}
+.carInfo-time{
+  color: #ccc;
 }
 </style>
 
