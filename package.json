@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.9",
+<<<<<<< Updated upstream
     "echarts": "^5.3.3",
+=======
+    "dayjs": "^1.11.5",
+>>>>>>> Stashed changes
     "element-plus": "^2.2.15",
     "sass": "^1.54.8",
     "vue": "^3.2.37",
