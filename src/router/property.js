@@ -14,6 +14,11 @@ export default [
     path: '/VisitorComeGo',
     component: () => import('../views/property/Visitor/VisitorComeGo.vue')
   },
+  {
+    path: '/addVisitor',
+    component: () => import('../views/property/Visitor/addVisitor.vue')
+
+  },
   // 车辆管理
   {
     path: '/CarInfo',
@@ -21,7 +26,7 @@ export default [
   },
   {
     path: '/CarComeGo',
-    component: () => import('../views/property/car/CarComeGo.vue')
+    component: () => import('../views/property/Car/CarComeGo.vue')
   },
   // 设备管理
   {
@@ -56,5 +61,6 @@ export default [
     path: '/sourceNetStorage',
     component: () => import('../views/property/device/sourceNetStorage.vue')
   }
+
 ]
 
