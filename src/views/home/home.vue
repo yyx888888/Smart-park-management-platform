@@ -7,7 +7,7 @@
         <dailyEnergy/>
         <div class="title">企业资质情况</div>
         <qualification/>
-        <div class="title">服务统计</div>
+        <div class="title serTitle">服务统计</div>
         <div class="service">
           <div class="serviceTitle">
             <div class="subBarOne"></div>
@@ -22,7 +22,9 @@
       </div>
     </div>
     <div class="column middleBox">
-      <img src="../../../public/images/stateBanner.png" alt="">
+      <div class="myImage">
+        <img src="../../../public/images/stateBanner.png" alt="" >
+      </div>
       <div class="middleBottomBox">
         <div class="flexBox">
           <div class="flexItem">
@@ -91,16 +93,6 @@
           <div class="carInfo-status">进场</div>
           <div class="carInfo-number">川A223JK</div>
           <div class="carInfo-time" >{{ this.confirmTime }}</div>
-        </div>
-        <div class="carInfo-item">
-          <div class="carInfo-status">进场</div>
-          <div class="carInfo-number">川A223JK</div>
-          <div class="carInfo-time">{{ this.confirmTime }}</div>
-        </div>
-        <div class="carInfo-item">
-          <div class="carInfo-status">进场</div>
-          <div class="carInfo-number">川A223JK</div>
-          <div class="carInfo-time">{{ this.confirmTime }}</div>
         </div>
       </div>
     </div>
@@ -195,10 +187,10 @@ export default ({
   color: white;
   font-size: 20px;
   font-weight: 700;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   padding-left: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #027db4;
 }
 .serviceTitle{
@@ -228,7 +220,7 @@ export default ({
   background-color: #fff;
 }
 .demo-progress{
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -236,13 +228,17 @@ export default ({
   border: none;
   background-color: rgba(10, 58, 125, 0);
 }
-img {
-  height: 550px;
+.myImage{
+  width: 100%;
+  height: 410px;
   margin-top: -10px;
-  margin-left: -10px;
+}
+img {
+  width: 100%;
+  height: 100%;
 }
 .chart  {
-  height: 400px;
+  height: 260px;
 }
 .middleBottomBox{
   background-color: #162a41;
@@ -288,8 +284,8 @@ img {
   font-size: 12px;
 }
 .carChart{
-  margin-top: -300px;
-  margin-left: 220px;
+  margin-top: -50%;
+  margin-left: 50%;
 }
 .el-progress ::v-deep(path:first-child){
   stroke: #5080de;
@@ -300,7 +296,7 @@ img {
   justify-content: space-evenly;
 }
 .carInfo-item{
-  margin: 20px auto;
+  margin: 18px auto;
   width: 90%;
   display: flex;
   justify-content: space-evenly;
@@ -316,7 +312,7 @@ img {
   line-height: 30px;
 }
 .carInfo-number{
-  padding-left: 90px;
+  padding-left: 22%;
   font-size: 20px;
   color: #fff;
 }

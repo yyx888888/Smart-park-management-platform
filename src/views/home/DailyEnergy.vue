@@ -26,7 +26,7 @@ export default ({
       },
       legend: {
         data: ['煤', '气', '油', '电', '热'],
-        axisLabel:{
+        textStyle:{
           color:'#fff'
         },
         lineHeight: 56
@@ -120,7 +120,7 @@ export default ({
 
 <style scoped>
 .chart {
-  height: 300px;
+  height: 250px;
 
 }
 </style>

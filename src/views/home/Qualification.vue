@@ -15,7 +15,7 @@ export default ({
   setup: () => {
     const option = ref({
       legend: {
-        axisLabel:{
+        textStyle:{
           color:'#fff'
         }
       },
@@ -66,6 +66,6 @@ export default ({
 
 <style scoped>
 .chart{
-  height: 300px;
+  height: 250px;
 }
 </style>
