@@ -64,8 +64,7 @@ import MyPaginationVue from "../../../components/MyPagination.vue";
 // 使用路由
 const $router = useRouter();
 function toAdd() {
-  // 路由跳转
-  $router.push("/addVisitor");
+  $router.replace({ path: "/addVisitor" });
 }
 const tableData = [
   {

@@ -31,7 +31,24 @@ export default [
   // 设备管理
   {
     path: '/accessControl',
-    component: () => import('../views/property/device/accessControl.vue')
+    redirect: '/DeviceList',
+    component: () => import('../views/property/device/accessControl.vue'),
+
+    children: [
+      // 设备管理下面3个子页面的路由
+      {
+        path: '/DeviceList',
+        component: () => import('../views/property/device/Submenu/DeviceList.vue')
+      },
+      {
+        path: '/AlarmRecord',
+        component: () => import('../views/property/device/Submenu/AlarmRecord.vue')
+      },
+      {
+        path: '/Operations',
+        component: () => import('../views/property/device/Submenu/Operations.vue')
+      }
+    ]
   },
   {
     path: '/vehicleBarrier',

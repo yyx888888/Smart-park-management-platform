@@ -10,12 +10,15 @@
           background-color="#415c85"
           text-color="#fff"
           active-text-color="#FFFAF0"
-          default-active="totalProperty"
+          :default-active="activePath"
           unique-opened
           router
         >
           <!-- 物业总览一级菜单 -->
-          <el-menu-item index="totalProperty">
+          <el-menu-item
+            index="totalProperty"
+            @click="savNavState('totalProperty')"
+          >
             <template #title>
               <el-icon>
                 <HomeFilled />
@@ -24,6 +27,7 @@
             </template>
           </el-menu-item>
           <!--  循环带子菜单的一级菜单 -->
+
           <el-sub-menu
             :index="item.id.toString()"
             v-for="(item, index) in menuData"
@@ -38,11 +42,13 @@
               <span>{{ item.authName }} </span>
             </template>
             <!-- 二级菜单 循环二级菜单 -->
+            <!--  添加点击事件  把路径传过去 -->
             <el-menu-item
               :index="childrenItem.path"
               v-for="childrenItem in item.children"
               :key="childrenItem.id"
               text-color="#fff"
+              @click="savNavState(childrenItem.path)"
             >
               <span>{{ childrenItem.authName }}</span>
             </el-menu-item>
@@ -60,7 +66,13 @@
 
 <script setup>
 import { reactive, ref } from "@vue/reactivity";
-import { useRouter } from "vue-router";
+
+// 被激活的链接  从本地存储中获取
+let activePath = ref(
+  // 如果本地存储没有值 展示的就是物业总览页面
+  window.sessionStorage.getItem("activePath") || "totalProperty"
+);
+
 // 字体图标数组
 // "HomeFilled"
 const iconList = reactive(["Reading", "Switch", "Printer"]);
@@ -98,6 +110,13 @@ const menuData = reactive([
     ],
   },
 ]);
+// 保存路径到session中 接受传过来的路径
+function savNavState(activePath) {
+  //传来的路径保存到本地存储
+  window.sessionStorage.setItem("activePath", activePath);
+  // 点击的路径赋值激活的链接
+  activePath = activePath;
+}
 </script>
 
 <style scoped>
