@@ -46,8 +46,9 @@
         <el-table-column prop="carNum" label="车牌号码" />
         <el-table-column prop="date" label="造访结束时间" />
         <el-table-column label="操作">
-          <template #default>
-            <el-link :underline="false">详情</el-link>
+          <template v-slot="scope">
+            <!--        把父标签的内容传递到方法内 -->
+            <el-link :underline="false" @click="open(scope.row)">详情</el-link>
             <el-link :underline="false" style="margin-left: 50px">删除</el-link>
           </template>
         </el-table-column>
@@ -64,7 +65,7 @@ import MyPaginationVue from "../../../components/MyPagination.vue";
 // 使用路由
 const $router = useRouter();
 function toAdd() {
-  $router.replace({ path: "/addVisitor" });
+  $router.replace({ path: "/property/VisitorInfo/addVisitor" });
 }
 const tableData = [
   {
@@ -96,6 +97,18 @@ for (i = 0; i < 8; i++) {
     driveCar: "是",
     carNum: "浙A12345",
     date: "2022-02-23",
+  });
+}
+// 打开详情页 接收传过来的参数
+function open(row) {
+  console.log("这一行的信息", row);
+  $router.push({
+    name: "VisitorDetails",
+    // 参数传过去
+    params: {
+      //  独享转换为字符串
+      rowData: JSON.stringify(row),
+    },
   });
 }
 </script>

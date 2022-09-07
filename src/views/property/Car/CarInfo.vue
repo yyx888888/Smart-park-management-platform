@@ -6,7 +6,7 @@
         <span class="headerTitle">车辆信息管理</span>
       </div>
       <span>
-        <el-button type="primary">新增</el-button>
+        <el-button type="primary" @click="addCar()">新增</el-button>
         <el-button type="warning">批量删除</el-button>
       </span>
     </el-header>
@@ -60,8 +60,15 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
 import MyPaginationVue from "../../../components/MyPagination.vue";
 const tableData = [];
+// 使用路由
+const $router = useRouter();
+// 点击新增路由跳转
+function addCar() {
+  $router.replace({ path: "/property/addCar" });
+}
 
 for (let i = 0; i < 8; i++) {
   tableData.push({

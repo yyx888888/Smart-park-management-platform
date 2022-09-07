@@ -16,11 +16,17 @@
         class="el-menu-demo"
         mode="horizontal"
         router
-        :default-active="currentPath"
+        default-active="/property/accessControl/DeviceList"
       >
-        <el-menu-item index="DeviceList">设备列表</el-menu-item>
-        <el-menu-item index="AlarmRecord">告警记录</el-menu-item>
-        <el-menu-item index="Operations">运维记录</el-menu-item>
+        <el-menu-item index="/property/accessControl/DeviceList"
+          >设备列表</el-menu-item
+        >
+        <el-menu-item index="/property/accessControl/AlarmRecord"
+          >告警记录</el-menu-item
+        >
+        <el-menu-item index="/property/accessControl/Operations"
+          >运维记录</el-menu-item
+        >
       </el-menu>
 
       <!-- 子页面显示的位置 -->

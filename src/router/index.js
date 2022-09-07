@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 // 引入物业管理相关的路由页面
 import propertyRouter from './property'
+
 const manageroutes = [
   {
     path: '/login',
@@ -32,7 +33,7 @@ const manageroutes = [
       {
         path: '/property',
         name: 'property',
-        redirect: '/totalProperty',
+        redirect: '/property/totalProperty',
         component: () => import('../views/property/property.vue'),
         children: [
           // 引入物业管理相关的路由

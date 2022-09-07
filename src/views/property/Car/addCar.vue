@@ -3,7 +3,7 @@
     <el-header>
       <div class="title">
         <span class="headerimg"></span>
-        <span class="headerTitle">访客信息新增</span>
+        <span class="headerTitle">车辆信息新增</span>
       </div>
       <span>
         <el-button type="warning" @click="close">关闭</el-button>
@@ -12,7 +12,7 @@
     <el-container style="padding: 3% 5%">
       <!-- 左侧表单 -->
       <el-aside style="width: 40%">
-        <p style="margin-bottom: 30px">访客基本信息：</p>
+        <p style="margin-bottom: 30px">车主基本信息：</p>
         <div class="leftFormBox">
           <el-form
             label-width="120px"
@@ -20,7 +20,7 @@
             style="max-width: 460px"
             :rules="rules"
           >
-            <el-form-item label="访客姓名：" prop="userName">
+            <el-form-item label="车主姓名：" prop="userName">
               <el-input
                 v-model="leftFormData.name"
                 placeholder="请输入访客姓名"
@@ -33,7 +33,7 @@
                 placeholder="请输入联系方式"
               />
             </el-form-item>
-            <el-form-item label="访客性别：" prop="sex">
+            <el-form-item label="人员性别：" prop="sex">
               <el-select
                 style="width: 100%"
                 v-model="leftFormData.sex"
@@ -43,10 +43,13 @@
                 <el-option label="女" value="female" />
               </el-select>
             </el-form-item>
-            <el-form-item label="访客学历：">
+            <el-form-item label="单位名称：">
               <el-input v-model="leftFormData.type" />
             </el-form-item>
-            <el-form-item label="绑定微信号：">
+            <el-form-item label="所属楼宇：">
+              <el-input v-model="leftFormData.WeChat" disabled />
+            </el-form-item>
+            <el-form-item label="房间名称：">
               <el-input v-model="leftFormData.WeChat" disabled />
             </el-form-item>
             <el-form-item label="人脸照片：" prop="photo">
@@ -57,7 +60,7 @@
       </el-aside>
       <!-- 右侧表单 -->
       <el-main style="margin-left: 2%">
-        <p style="margin-bottom: 30px">造访单位信息：</p>
+        <p style="margin-bottom: 30px">车辆基本信息：</p>
         <div class="rightFormBox">
           <el-form
             :model="rightFormData"

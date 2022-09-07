@@ -16,8 +16,8 @@
         >
           <!-- 物业总览一级菜单 -->
           <el-menu-item
-            index="totalProperty"
-            @click="savNavState('totalProperty')"
+            index="/property/totalProperty"
+            @click="savNavState('/property/totalProperty')"
           >
             <template #title>
               <el-icon>
@@ -44,11 +44,11 @@
             <!-- 二级菜单 循环二级菜单 -->
             <!--  添加点击事件  把路径传过去 -->
             <el-menu-item
-              :index="childrenItem.path"
+              :index="'/property/' + childrenItem.path"
               v-for="childrenItem in item.children"
               :key="childrenItem.id"
               text-color="#fff"
-              @click="savNavState(childrenItem.path)"
+              @click="savNavState('/property/' + childrenItem.path)"
             >
               <span>{{ childrenItem.authName }}</span>
             </el-menu-item>
@@ -70,7 +70,7 @@ import { reactive, ref } from "@vue/reactivity";
 // 被激活的链接  从本地存储中获取
 let activePath = ref(
   // 如果本地存储没有值 展示的就是物业总览页面
-  window.sessionStorage.getItem("activePath") || "totalProperty"
+  window.sessionStorage.getItem("activePath") || "/property/totalProperty"
 );
 
 // 字体图标数组

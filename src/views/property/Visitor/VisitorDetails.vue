@@ -3,7 +3,7 @@
     <el-header>
       <div class="title">
         <span class="headerimg"></span>
-        <span class="headerTitle">访客信息新增</span>
+        <span class="headerTitle">访客详情信息</span>
       </div>
       <span>
         <el-button type="warning" @click="close">关闭</el-button>
@@ -140,9 +140,18 @@
 
 <script setup>
 import { reactive, ref } from "@vue/reactivity";
+import { onMounted } from "@vue/runtime-core";
 import { ElMessageBox } from "element-plus";
 import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
+const route = useRoute();
+
 const $router = useRouter();
+onMounted(() => {
+  //字符串转换为对象
+  console.log("能获取到吗?", JSON.parse(route.params.rowData));
+  // 然后统一赋值就可以了 后面没写********************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+});
 
 const leftFormData = reactive({
   userName: "",
