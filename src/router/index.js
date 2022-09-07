@@ -1,17 +1,18 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-const manageroutes = [
 
+// 引入物业管理相关的路由页面
+import propertyRouter from './property'
+const manageroutes = [
   {
     path: '/login',
     name: 'Login',
     component: () => import('../views/login.vue'),
   },
   {
-    path: '/home',
-    name: '/home',
+    path: '/',
+    name: '/',
     component: () => import('../layout/index.vue'),
     children: [
-
       {
         path: '/home',
         name: 'home',
@@ -25,12 +26,19 @@ const manageroutes = [
       {
         path: '/operation',
         name: 'operation',
-        component: () => import('../views/operation.vue')
+        component: () => import('../views/operation.vue'),
       },
+
       {
         path: '/property',
         name: 'property',
-        component: () => import('../views/property.vue')
+        redirect: '/totalProperty',
+        component: () => import('../views/property/property.vue'),
+        children: [
+          // 引入物业管理相关的路由
+          ...propertyRouter
+        ]
+
       },
       {
         path: '/visualization',
