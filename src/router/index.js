@@ -1,4 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+
+
+
+// 引入物业管理相关的路由页面
+import propertyRouter from './property'
+
 const manageroutes = [
 
   {
@@ -11,6 +17,7 @@ const manageroutes = [
     name: '/',
     component: () => import('../layout/index.vue'),
     children: [
+
 
       {
         path: '/home',
@@ -30,7 +37,13 @@ const manageroutes = [
       {
         path: '/property',
         name: 'property',
-        component: () => import('../views/property.vue')
+        redirect: '/property/totalProperty',
+        component: () => import('../views/property/property.vue'),
+        children: [
+          // 引入物业管理相关的路由
+          ...propertyRouter
+        ]
+
       },
       {
         path: '/visualization',

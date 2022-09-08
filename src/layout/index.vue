@@ -8,40 +8,32 @@
       <div class="header-bottom">
         <div class="select">
           项目地址
-          <el-select
-            class="m-2"
-            placeholder="Select"
-            size="small"
-          >
+          <el-select class="m-2" placeholder="Select" size="small">
             <el-option />
           </el-select>
         </div>
         <div class="timer">
-        {{ nowTime }}
+          {{ nowTime }}
         </div>
       </div>
       <el-main>
-      <router-view />
+        <router-view />
       </el-main>
     </el-container>
   </div>
 </template>
 
 <script setup>
-
 import Header from "../components/header.vue";
-import { formatTime } from '../utils/formatdate'
-import { ref, onMounted } from 'vue'
+import { formatTime } from "../utils/formatdate";
+import { ref, onMounted } from "vue";
 
-
-const nowTime = ref("nowTime")
+const nowTime = ref("nowTime");
 onMounted(() => {
-    setInterval(() => {
-        nowTime.value = formatTime(new Date())
-    })
+  setInterval(() => {
+    nowTime.value = formatTime(new Date());
+  });
 });
-
-
 </script>
 
 <style scoped>
@@ -79,6 +71,5 @@ onMounted(() => {
   width: 200px;
   top: 6px;
   float: right;
-
 }
 </style>
