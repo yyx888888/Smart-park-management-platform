@@ -16,7 +16,7 @@ Object.keys(ElementPlusIconsVue).forEach(key => {
   })
 
   // 绑定实例
-app.config.globalProperties.$echarts = echarts
+app.config.globalProperties.$echarts = echarts 
 
 app.use(router)
 app.use(ElementPlus)
