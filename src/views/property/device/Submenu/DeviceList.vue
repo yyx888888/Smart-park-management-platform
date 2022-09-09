@@ -1,43 +1,45 @@
 <template>
   <!-- 搜索表单 -->
-  <div class="searchForm">
-    <el-form :inline="true" class="demo-form-inline">
-      <el-form-item label="设备名称">
-        <el-input placeholder="请输入设备名称" />
-      </el-form-item>
-      <el-form-item label="设备编号：">
-        <el-input placeholder="请输入设备编号" />
-      </el-form-item>
-      <el-form-item label="运行状态：">
-        <el-input placeholder="请输入运行状态" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary">查询</el-button>
-        <el-button>重置</el-button>
-      </el-form-item>
-    </el-form>
-  </div>
+  <div>
+    <div class="searchForm">
+      <el-form :inline="true" class="demo-form-inline">
+        <el-form-item label="设备名称">
+          <el-input placeholder="请输入设备名称" />
+        </el-form-item>
+        <el-form-item label="设备编号：">
+          <el-input placeholder="请输入设备编号" />
+        </el-form-item>
+        <el-form-item label="运行状态：">
+          <el-input placeholder="请输入运行状态" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary">查询</el-button>
+          <el-button>重置</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
 
-  <!-- 表格 -->
-  <el-table :data="tableData" style="width: 100%" border>
-    <!-- 多选框 -->
-    <el-table-column type="selection" />
-    <el-table-column prop="name" label="设备名称" />
-    <el-table-column prop="num" label="设备编号" />
-    <el-table-column prop="type" label="设备型号" />
-    <el-table-column prop="location" label="安装位置" />
-    <el-table-column prop="state" label="运行状态" />
-    <el-table-column prop="runtime" label="运行时长(天)" />
-    <el-table-column prop="updateTime" label="最近更新时间" />
-    <el-table-column label="操作">
-      <template #default>
-        <el-link :underline="false">详情</el-link>
-        <el-link :underline="false" style="float: right">删除</el-link>
-      </template>
-    </el-table-column>
-  </el-table>
-  <!-- 分页组件 -->
-  <MyPaginationVue></MyPaginationVue>
+    <!-- 表格 -->
+    <el-table :data="tableData" style="width: 100%" border>
+      <!-- 多选框 -->
+      <el-table-column type="selection" />
+      <el-table-column prop="name" label="设备名称" />
+      <el-table-column prop="num" label="设备编号" />
+      <el-table-column prop="type" label="设备型号" />
+      <el-table-column prop="location" label="安装位置" />
+      <el-table-column prop="state" label="运行状态" />
+      <el-table-column prop="runtime" label="运行时长(天)" />
+      <el-table-column prop="updateTime" label="最近更新时间" />
+      <el-table-column label="操作">
+        <template #default>
+          <el-link :underline="false">详情</el-link>
+          <el-link :underline="false" style="float: right">删除</el-link>
+        </template>
+      </el-table-column>
+    </el-table>
+    <!-- 分页组件 -->
+    <MyPaginationVue></MyPaginationVue>
+  </div>
 </template>
 
 <script setup>
@@ -59,6 +61,7 @@ for (let i = 0; i < 8; i++) {
 <style lang="scss" scoped>
 .el-container {
   background-color: #fff;
+
   .el-header {
     border-bottom: 10px solid #eee;
     display: flex;
@@ -94,6 +97,7 @@ for (let i = 0; i < 8; i++) {
   margin-bottom: 20px;
   margin-top: 1%;
 }
+
 .el-form {
   display: flex;
   justify-content: space-between;

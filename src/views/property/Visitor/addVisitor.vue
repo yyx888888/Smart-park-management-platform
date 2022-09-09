@@ -14,31 +14,16 @@
       <el-aside style="width: 40%">
         <p style="margin-bottom: 30px">访客基本信息：</p>
         <div class="leftFormBox">
-          <el-form
-            label-width="120px"
-            :model="leftFormData"
-            style="max-width: 460px"
-            :rules="rules"
-          >
+          <el-form label-width="120px" :model="leftFormData" style="max-width: 460px" :rules="rules">
             <el-form-item label="访客姓名：" prop="userName">
-              <el-input
-                v-model="leftFormData.name"
-                placeholder="请输入访客姓名"
-              />
+              <el-input v-model="leftFormData.name" placeholder="请输入访客姓名" />
             </el-form-item>
             <el-form-item label="联系方式：" prop="phone">
-              <el-input
-                oninput="value=value.replace(/[^\d.]/g,'')"
-                v-model="leftFormData.phone"
-                placeholder="请输入联系方式"
-              />
+              <el-input oninput="value=value.replace(/[^\d.]/g,'')" v-model="leftFormData.phone"
+                placeholder="请输入联系方式" />
             </el-form-item>
             <el-form-item label="访客性别：" prop="sex">
-              <el-select
-                style="width: 100%"
-                v-model="leftFormData.sex"
-                clearable
-              >
+              <el-select style="width: 100%" v-model="leftFormData.sex" clearable>
                 <el-option label="男" value="male" />
                 <el-option label="女" value="female" />
               </el-select>
@@ -59,12 +44,7 @@
       <el-main style="margin-left: 2%">
         <p style="margin-bottom: 30px">造访单位信息：</p>
         <div class="rightFormBox">
-          <el-form
-            :model="rightFormData"
-            label-width="120px"
-            :inline="true"
-            :rules="rules"
-          >
+          <el-form :model="rightFormData" label-width="120px" :inline="true" :rules="rules">
             <el-row>
               <el-col :span="12">
                 <el-form-item label="造访类型：" prop="type">
@@ -105,36 +85,33 @@
               </el-col>
             </el-row>
             <el-form-item label="造访时间:">
-              <el-date-picker
-                v-model="value2"
-                type="datetimerange"
-                start-placeholder="请选择造访开始时间"
-                end-placeholder="请选择造访结束时间"
-                :default-time="defaultTime2"
-              />
+              <el-date-picker v-model="value2" type="datetimerange" start-placeholder="请选择造访开始时间"
+                end-placeholder="请选择造访结束时间" :default-time="defaultTime2" />
             </el-form-item>
           </el-form>
         </div>
       </el-main>
     </el-container>
-    <!-- <el-row justify="center">
-      <el-col :span="2">
+    <el-row justify="center" class="buttonBox">
+      <el-col :span=" 2">
         <el-button type="primary" size="large">保存</el-button>
       </el-col>
       <el-col :span="2">
         <el-button size="large" @click="close">取消</el-button>
       </el-col>
-    </el-row> -->
-    <el-footer
+    </el-row>
+
+
+    <!-- <el-footer
       style="
-        margin: 0 50% 2% 37%;
+        margin: 0 50% 0 37%
         display: flex;
         justify-content: space-between;
       "
     >
       <el-button type="primary" size="large">保存</el-button>
       <el-button size="large" @click="close">取消</el-button>
-    </el-footer>
+    </el-footer> -->
   </el-container>
 </template>
 
@@ -199,13 +176,14 @@ const close = () => {
       // 点击确定
       $router.push("/property/VisitorInfo");
     })
-    .catch(() => {});
+    .catch(() => { });
 };
 </script>
 
 <style lang="scss" scoped>
 .el-container {
   background-color: #fff;
+
   .el-header {
     border-bottom: 10px solid #eee;
     display: flex;
@@ -233,10 +211,12 @@ const close = () => {
     }
   }
 }
+
 .el-main {
   margin: 0;
   padding: 0;
 }
+
 // 左侧表单盒子
 .leftFormBox {
   border: 1px solid #000;
@@ -246,6 +226,7 @@ const close = () => {
   padding: 5%;
   font-size: 20px;
 }
+
 // 右侧表单盒子
 .rightFormBox {
   padding: 5%;
@@ -254,5 +235,10 @@ const close = () => {
   border-radius: 10px;
 
   border: 1px solid #000;
+}
+
+.buttonBox {
+  bottom: 10%;
+
 }
 </style>

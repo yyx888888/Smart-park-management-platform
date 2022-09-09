@@ -40,6 +40,14 @@ export default [
     path: 'addCar',
     component: () => import('../views/property/Car/addCar.vue')
   },
+  {
+    // 占位符
+    path: '/property/CarInfo/carDetails/:rowData',
+    // 起个名字 方便使用params传递参数
+    name: 'carDetails',
+    component: () => import('../views/property/Car/carDetails.vue')
+
+  },
   // 设备管理
   {
     path: 'accessControl',
@@ -50,7 +58,8 @@ export default [
       // 设备管理下面3个子页面的路由
       {
         path: 'DeviceList',
-        component: () => import('../views/property/device/Submenu/DeviceList.vue')
+        component: () => import('../views/property/device/Submenu/DeviceList.vue'),
+
       },
       {
         path: 'AlarmRecord',
@@ -59,8 +68,13 @@ export default [
       {
         path: 'Operations',
         component: () => import('../views/property/device/Submenu/Operations.vue')
-      }
+      },
+
     ]
+  },
+  {
+    path: 'addList',
+    component: () => import('../views/property/device/Submenu/addList.vue')
   },
   {
     path: 'vehicleBarrier',

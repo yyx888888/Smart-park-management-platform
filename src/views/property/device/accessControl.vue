@@ -5,28 +5,19 @@
         <span class="headerimg"></span>
         <span class="headerTitle">智能门禁管理</span>
       </div>
+
       <!-- 只有页面是设备列表时才展示按钮 -->
-      <span v-if="currentPath2 === 'DeviceList'">
-        <el-button type="primary">新增</el-button>
+
+      <span v-if="currentPath2 === 'property/accessControl/DeviceList'">
+        <el-button type="primary" @click="addList">新增</el-button>
         <el-button type="warning">批量删除</el-button>
       </span>
     </el-header>
     <el-main>
-      <el-menu
-        class="el-menu-demo"
-        mode="horizontal"
-        router
-        default-active="/property/accessControl/DeviceList"
-      >
-        <el-menu-item index="/property/accessControl/DeviceList"
-          >设备列表</el-menu-item
-        >
-        <el-menu-item index="/property/accessControl/AlarmRecord"
-          >告警记录</el-menu-item
-        >
-        <el-menu-item index="/property/accessControl/Operations"
-          >运维记录</el-menu-item
-        >
+      <el-menu class="el-menu-demo" mode="horizontal" router default-active="/property/accessControl/DeviceList">
+        <el-menu-item index="/property/accessControl/DeviceList">设备列表</el-menu-item>
+        <el-menu-item index="/property/accessControl/AlarmRecord">告警记录</el-menu-item>
+        <el-menu-item index="/property/accessControl/Operations">运维记录</el-menu-item>
       </el-menu>
 
       <!-- 子页面显示的位置 -->
@@ -56,11 +47,16 @@ watch(
   // 初始执行一次
   { immediate: true }
 );
+function addList() {
+  $router.replace({ path: "/property/addList" });
+
+}
 </script>
 
 <style lang="scss" scoped>
 .el-container {
   background-color: #fff;
+
   .el-header {
     border-bottom: 10px solid #eee;
     display: flex;

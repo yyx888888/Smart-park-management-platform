@@ -20,7 +20,7 @@
       <el-col :span="6">
         <el-container>
           <el-header>设备分类占比</el-header>
-          <el-main>
+          <el-main style="padding: 20px;">
             <!-- 设备分类占比饼形图 -->
             <deviceEchartVue />
           </el-main>
@@ -31,11 +31,7 @@
           <el-header>
             <el-row justify="space-between">
               <el-col :span="18">
-                <el-menu
-                  default-active="1"
-                  class="el-menu-demo"
-                  mode="horizontal"
-                >
+                <el-menu default-active="1" class="el-menu-demo" mode="horizontal">
                   <el-menu-item index="1">物业缴费</el-menu-item>
                   <el-menu-item index="2">公共资源</el-menu-item>
                   <el-menu-item index="3">车辆缴费</el-menu-item>
@@ -63,7 +59,9 @@
       <el-col :span="10">
         <el-container>
           <el-header>设备报错原因分析</el-header>
-          <el-main><errorEchart /> </el-main>
+          <el-main>
+            <errorEchart />
+          </el-main>
         </el-container>
       </el-col>
       <el-col :span="14">
@@ -129,11 +127,13 @@ let select = ref("");
         border: 1px solid rgba(215, 215, 215, 1);
         height: 100px;
         padding: 10px 10px 50px 10px;
+
         .total {
           font-weight: 500;
           font-style: normal;
           font-size: 30px;
         }
+
         .text {
           margin-top: 10px;
           display: flex;
@@ -142,15 +142,19 @@ let select = ref("");
       }
     }
   }
+
   .secondRow {
     margin-top: 10px;
+
     .el-container {
       border: 1px solid rgba(215, 215, 215, 1);
+
       .el-header {
         border-bottom: 1px solid rgba(215, 215, 215, 1);
         height: 60px;
         line-height: 60px;
         font-size: 14px;
+
         .el-menu--horizontal {
           border-bottom: none;
         }

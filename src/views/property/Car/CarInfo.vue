@@ -47,8 +47,8 @@
         <el-table-column prop="beginTime" label="开始时间" />
         <el-table-column prop="overTime" label="结束时间" />
         <el-table-column label="操作">
-          <template #default>
-            <el-link :underline="false">详情</el-link>
+          <template v-slot="scope">
+            <el-link :underline="false" @click="open(scope.row)">详情</el-link>
             <el-link :underline="false" style="margin-left: 50px">删除</el-link>
           </template>
         </el-table-column>
@@ -66,8 +66,21 @@ const tableData = [];
 // 使用路由
 const $router = useRouter();
 // 点击新增路由跳转
+
 function addCar() {
   $router.replace({ path: "/property/addCar" });
+}
+// 打开详情页 接收传过来的参数
+function open(row) {
+  console.log("这一行的信息", row);
+  $router.push({
+    name: "carDetails",
+    // 参数传过去
+    params: {
+      //  独享转换为字符串
+      rowData: JSON.stringify(row),
+    },
+  });
 }
 
 for (let i = 0; i < 8; i++) {
@@ -86,6 +99,7 @@ for (let i = 0; i < 8; i++) {
 <style lang="scss" scoped>
 .el-container {
   background-color: #fff;
+
   .el-header {
     border-bottom: 10px solid #eee;
     display: flex;
@@ -120,6 +134,7 @@ for (let i = 0; i < 8; i++) {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
 .el-form {
   display: flex;
   justify-content: space-between;

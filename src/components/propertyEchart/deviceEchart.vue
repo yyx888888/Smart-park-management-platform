@@ -16,10 +16,20 @@ let myEcharts = reactive({});
 let option = {
   tooltip: {
     trigger: "item",
+    // formatter: '{你好}<br />{你好吗，啊}: {c0}种<br />{a1}: {c1}种<br />'
   },
   legend: {
-    top: "5%",
+    orient: 'horizontal',
+    bottom: "0%",
     left: "center",
+    itemHeight: 10,
+    itemWidth: 10,
+    icon: "circle",
+    textStyle: {
+      fontSize: 8,
+      fontWeight: 200
+    }
+
   },
   series: [
     {
@@ -32,7 +42,8 @@ let option = {
           show: true,
           position: "center",
           color: "#4c4a4a",
-          formatter: () => `<h1>设备总数</h1>`,
+          formatter: () => ' 设备总数 \n\n  1354 ',
+
           rich: {
             total: {
               fontSize: 35,
@@ -74,6 +85,8 @@ const init = () => {
 .echart {
   box-sizing: border-box;
   height: 260px;
+  width: 100%;
   margin: 0 auto;
+
 }
 </style>
