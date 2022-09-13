@@ -1,7 +1,5 @@
 
-
 import { ElMessage } from 'element-plus'
-
 
 import axios from "axios";
 const service = axios.create({
