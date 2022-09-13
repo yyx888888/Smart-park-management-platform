@@ -293,8 +293,8 @@ const rules = {
 // 左侧表单盒子
 .leftFormBox {
   border: 1px solid #000;
-  width: 80%;
-  height: 74%;
+  width: 100%;
+  height: 82%;
   border-radius: 10px;
   padding: 5%;
   font-size: 20px;
@@ -303,15 +303,9 @@ const rules = {
 // 右侧表单盒子
 .rightFormBox {
   padding: 5%;
-  width: 80%;
-  height: 71%;
+  width: 100%;
+  height: 82%;
   border-radius: 10px;
-
   border: 1px solid #000;
-}
-
-.buttonBox {
-  bottom: 2%;
-
 }
 </style>

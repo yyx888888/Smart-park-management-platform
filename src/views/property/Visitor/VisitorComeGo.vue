@@ -89,6 +89,7 @@ for (i = 0; i < 8; i++) {
 <style lang="scss" scoped>
 .el-container {
   background-color: #fff;
+
   .el-header {
     border-bottom: 10px solid #eee;
     display: flex;
@@ -123,6 +124,7 @@ for (i = 0; i < 8; i++) {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
 .el-form {
   display: flex;
   justify-content: space-between;
