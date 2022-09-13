@@ -30,7 +30,7 @@
 
 
           <el-form-item>
-            <el-button type="primary" @click="serch">查询</el-button>
+            <el-button type="primary">查询</el-button>
             <el-button type="info">重置</el-button>
           </el-form-item>
         </el-form>
@@ -144,13 +144,13 @@ const deleteCarHandler = async (row) => {
 
 // 打开详情页 接收传过来的参数
 function open(row) {
-  console.log("这一行的信息", row);
+  console.log("这一行的信息", row.ownerId);
   $router.push({
     name: "carDetails",
     // 参数传过去
     params: {
       //  转换为字符串
-      rowData: JSON.stringify(row),
+      rowData: JSON.stringify(row.ownerId),
     },
   });
 }

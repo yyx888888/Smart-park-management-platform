@@ -1,4 +1,5 @@
 <template>
+
   <el-container>
     <el-header>
       <div class="title">
@@ -53,7 +54,7 @@
             <el-row>
               <el-col :span="12">
                 <el-form-item label="车辆类型： ">
-                  <el-select v-model="FormData.carType" clea>
+                  <el-select v-model="FormData.carType" disabled>
                     <el-option label="临时车" value="temp" />
                     <el-option label="包月车" value="month" />
                     <el-option label="园区车" value="park" />
@@ -69,12 +70,12 @@
             <el-row>
               <el-col :span="12">
                 <el-form-item label="车辆品牌：" prop="carBrands">
-                  <el-input v-model="FormData.carBrands" disabled />
+                  <el-input v-model="FormData.carNumber" disabled />
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item label="车辆型号：" prop="carModel">
-                  <el-input v-model="FormData.carModel" disabled />
+                  <el-input v-model="FormData.carVersion" disabled />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -103,43 +104,53 @@
         <el-button size="large" @click="close">取消</el-button>
       </el-col>
     </el-row>
-
-
-    <!-- <el-footer
-      style="
-        margin: 0 50% 0 37%
-        display: flex;
-        justify-content: space-between;
-      "
-    >
-      <el-button type="primary" size="large">保存</el-button>
-      <el-button size="large" @click="close">取消</el-button>
-    </el-footer> -->
   </el-container>
+
 </template>
 
 <script setup>
-import { onMounted } from "@vue/runtime-core";
+import { onMounted, onBeforeMount } from "@vue/runtime-core";
 
 import { reactive, ref } from "@vue/reactivity";
 import { ElMessageBox } from "element-plus";
 import { useRouter, useRoute } from "vue-router";
 import { toRaw } from '@vue/reactivity'
+import { useStore } from "vuex";
+import { use } from "echarts";
 const $router = useRouter();
 const route = useRoute();
+const store = useStore()
 
-// 表单数据
-let FormData = {};
+// 获取点击详情传过来的id
+let id = JSON.parse(route.params.rowData)
 
-//字符串转换为对象
-console.log("能获取到吗?", JSON.parse(route.params.rowData));
-// 获取到传过来的参数
-let row = JSON.parse(route.params.rowData)
-// 赋值给表单 
-FormData = row
-// 
+console.log('id');
 
-console.log('有数据吗', FormData);
+
+// 去vux查询数据
+store.dispatch('property/CarSearch', id)
+
+const FormData = reactive(toRaw(store.state.property.carDetails[0][0]))
+console.log('查询后的数据', store.state.property.carDetails);
+
+
+
+
+
+
+
+
+
+
+
+// // 筛选后的数据赋值
+// = toRaw(store.state.property.carDetails[0][0])
+
+
+
+
+
+
 
 
 
