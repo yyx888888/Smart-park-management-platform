@@ -62,6 +62,33 @@
 <script setup>
 import { useRouter } from "vue-router";
 import MyPaginationVue from "../../../components/MyPagination.vue";
+// 导入接口
+import { getVisitor } from "../../../api/property";
+
+console.log('测试', getVisitor);
+
+
+// 获取访客需要的参数
+let getVisitorParms = {
+  page: '1',   // 获取第几页的数据
+  limit: '10'   // 获取几条数据
+}
+
+
+// 调用获取访客的函数
+getVisitorData()
+
+
+// 获取访客的异步函数
+async function getVisitorData() {
+  // 发送请求 接受请求回来的数据 并且重命名为 res
+  const data = await getVisitor(getVisitorParms)
+  // console.log('返回的数据', data)
+
+}
+
+
+
 // 使用路由
 const $router = useRouter();
 function toAdd() {
@@ -116,6 +143,7 @@ function open(row) {
 <style lang="scss" scoped>
 .el-container {
   background-color: #fff;
+
   .el-header {
     border-bottom: 10px solid #eee;
     display: flex;
@@ -150,6 +178,7 @@ function open(row) {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
 .el-form {
   display: flex;
   justify-content: space-between;

@@ -1,5 +1,6 @@
 <template>
-  <el-table :data="tableData" style="width: 100%">
+  <!-- 设备报错原因分析 -->
+  <el-table :data="tableData" style="width: 100%;" size="small">
     <el-table-column prop="type" label="类型" />
     <el-table-column prop="num" label="数量" />
     <el-table-column prop="address" label="占比" />
@@ -40,3 +41,9 @@ const tableData = [
   },
 ]
 </script>
+<style scoped>
+.el-table {
+  height: 260px;
+  border: none;
+}
+</style>

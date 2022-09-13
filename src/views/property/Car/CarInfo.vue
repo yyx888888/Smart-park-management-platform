@@ -15,7 +15,7 @@
       <div class="searchForm">
         <el-form :inline="true" class="demo-form-inline">
           <el-form-item label="车牌号码：">
-            <el-input placeholder="请输入访客姓名" />
+            <el-input placeholder="请输入车牌号码：" />
           </el-form-item>
           <el-form-item label="联系方式">
             <el-input placeholder="请输入联系方式" />
@@ -62,14 +62,26 @@
 <script setup>
 import { useRouter } from "vue-router";
 import MyPaginationVue from "../../../components/MyPagination.vue";
-const tableData = [];
+
+// 引入请求的接口
+
+import { reactive } from "vue";
+
+// 定义表数据对象
+const tableData = reactive([]);
 // 使用路由
 const $router = useRouter();
 // 点击新增路由跳转
 
+
+
+//添加汽车的方法
 function addCar() {
+  // 跳转页面
   $router.replace({ path: "/property/addCar" });
 }
+
+
 // 打开详情页 接收传过来的参数
 function open(row) {
   console.log("这一行的信息", row);
@@ -83,17 +95,7 @@ function open(row) {
   });
 }
 
-for (let i = 0; i < 8; i++) {
-  tableData.push({
-    name: "张兰",
-    phone: 135124563225,
-    carNum: "浙A12345",
-    carModel: "阿斯顿·马丁2012款 6.0L 手自一体",
-    carType: "车辆类型",
-    beginTime: "2020-01-23",
-    overTime: "2022-02-23",
-  });
-}
+
 </script>
 
 <style lang="scss" scoped>

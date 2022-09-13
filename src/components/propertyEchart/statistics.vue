@@ -14,6 +14,13 @@ const chart = ref(null);
 let myEcharts = reactive({});
 //4.定义好echarts的配置数据
 let option = {
+  // 鼠标经过的提示信息
+  tooltip: {
+    trigger: "axis",
+    axisPointer: {
+      type: "shadow",
+    },
+  },
   xAxis: {
     type: "category",
     boundaryGap: false,
@@ -76,9 +83,9 @@ const init = () => {
   //5.传入数据
   myEcharts.setOption(option);
   //additional：图表大小自适应窗口大小变化
-  window.onresize = () => {
+  window.addEventListener("resize", () => {
     myEcharts.resize();
-  };
+  })
 };
 </script>
 

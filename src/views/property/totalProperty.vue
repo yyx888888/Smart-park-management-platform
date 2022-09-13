@@ -30,8 +30,8 @@
         <el-container>
           <el-header>
             <el-row justify="space-between">
-              <el-col :span="18">
-                <el-menu default-active="1" class="el-menu-demo" mode="horizontal">
+              <el-col :span="17">
+                <el-menu default-active="1" class="el-menu-demo" mode="horizontal" style="width:100%">
                   <el-menu-item index="1">物业缴费</el-menu-item>
                   <el-menu-item index="2">公共资源</el-menu-item>
                   <el-menu-item index="3">车辆缴费</el-menu-item>
@@ -49,6 +49,7 @@
             </el-row>
           </el-header>
           <el-main>
+            <!-- 缴费 柱状图 -->
             <pagarEchart />
           </el-main>
         </el-container>
@@ -60,6 +61,7 @@
         <el-container>
           <el-header>设备报错原因分析</el-header>
           <el-main>
+            <!-- 设备报错原因分析 -->
             <errorEchart />
           </el-main>
         </el-container>
@@ -68,7 +70,7 @@
         <el-container>
           <el-header>
             <el-row justify="space-between">
-              <el-col :span="16">设备报错次数统计 </el-col>
+              <el-col :span="15">设备报错次数统计 </el-col>
               <span>统计频度： </span>
               <el-col :span="5">
                 <el-select class="m-2" v-model="select" style="width: 100%">
@@ -80,6 +82,7 @@
             </el-row>
           </el-header>
           <el-main>
+            <!-- 设备报错次数统计 -->
             <statistics />
           </el-main>
         </el-container>
@@ -93,6 +96,9 @@ import deviceEchartVue from "../../components/propertyEchart/deviceEchart.vue";
 import pagarEchart from "../../components/propertyEchart/pagarEchart.vue";
 import errorEchart from "../../components/propertyEchart/errorEchart.vue";
 import statistics from "../../components/propertyEchart/statistics.vue";
+import { onMounted } from "vue";
+
+
 
 const data = reactive([
   {

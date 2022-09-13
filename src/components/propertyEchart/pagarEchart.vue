@@ -1,5 +1,5 @@
 <template>
-  <!-- 设备分类占比饼形图 -->
+  <!-- 缴费柱形图 -->
   <div class="echart" ref="chart"></div>
 </template>
 
@@ -75,9 +75,12 @@ const init = () => {
   //5.传入数据
   myEcharts.setOption(option);
   //additional：图表大小自适应窗口大小变化
-  window.onresize = () => {
+  // window.onresize = () => {
+  //   myEcharts.resize();
+  // };
+  window.addEventListener("resize", () => {
     myEcharts.resize();
-  };
+  })
 };
 </script>
 
