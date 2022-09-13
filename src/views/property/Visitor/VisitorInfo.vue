@@ -95,9 +95,9 @@ const pageNo = ref(1)
 // 搜索查询表单的数据
 let serchData = reactive(
   {
-    carNumber: '',
-    carType: '',
-    ownerPhone: '',
+    name: '',
+    type: '',
+    phone: '',
     // 查询的条数，后端没有写全部查询
     limit: '10000',
     // 查询的页数
@@ -160,9 +160,10 @@ function toAdd() {
 async function serch() {
   // console.log('查询发送后台的数据', serchData);
   // 搜索和表单没有值触发的函数
+  console.log(serchData.name == '', serchData.type == '', serchData.phone == '');
   if (serchData.name == '' && serchData.type == '' && serchData.phone == '') {
-
     serchData.limit = getVisitorParms.limit
+    console.log('没有值');
   }
   tableData.splice(0, tableData.length) // 原数据清空
   // 发送请求 接受请求回来的数据 并且重命名为 res
