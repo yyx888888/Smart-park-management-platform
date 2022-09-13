@@ -30,6 +30,9 @@ app.config.globalProperties.$echarts = echarts
 
 app.use(router)
 
+app.use(store)
+
+
 
 app.use(ElementPlus, {
   locale: zhCn,

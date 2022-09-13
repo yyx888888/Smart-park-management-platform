@@ -11,31 +11,32 @@
     </el-header>
     <el-container style="padding: 3% 5%">
       <!-- 左侧表单 -->
-      <el-aside style="width: 40%">
+      <el-aside style="width: 35%">
         <p style="margin-bottom: 30px">访客基本信息：</p>
         <div class="leftFormBox">
-          <el-form label-width="120px" :model="leftFormData" style="max-width: 460px" :rules="rules">
-            <el-form-item label="访客姓名：" prop="userName">
-              <el-input v-model="leftFormData.name" placeholder="请输入访客姓名" />
+          <el-form label-width="120px" :model="VisitorDetail" style="max-width: 460px">
+            <el-form-item label="访客姓名：" required>
+              <el-input v-model="VisitorDetail.name" disabled />
             </el-form-item>
-            <el-form-item label="联系方式：" prop="phone">
-              <el-input oninput="value=value.replace(/[^\d.]/g,'')" v-model="leftFormData.phone"
-                placeholder="请输入联系方式" />
+            <el-form-item label=" 联系方式：" required>
+              <el-input v-model="VisitorDetail.phone" disabled />
             </el-form-item>
-            <el-form-item label="访客性别：" prop="sex">
-              <el-select style="width: 100%" v-model="leftFormData.sex" clearable>
+            <el-form-item label="访客性别：" required>
+              <el-select style="width: 100%" v-model="VisitorDetail.sex" disabled>
                 <el-option label="男" value="male" />
                 <el-option label="女" value="female" />
               </el-select>
             </el-form-item>
-            <el-form-item label="访客学历：">
-              <el-input v-model="leftFormData.type" />
+            <el-form-item label="访客学历：" required>
+              <el-input v-model="VisitorDetail.education" disabled />
             </el-form-item>
-            <el-form-item label="绑定微信号：">
-              <el-input v-model="leftFormData.WeChat" disabled />
+            <el-form-item label="绑定微信号：" required>
+              <el-input v-model="VisitorDetail.weChat" disabled />
             </el-form-item>
-            <el-form-item label="人脸照片：" prop="photo">
-              <el-input v-model="leftFormData.type" />
+            <el-form-item label="人脸照片" required>
+              <img
+                src="https://cdn3.axureshop.com/demo/1968221/images/%E7%A7%9F%E6%88%B7%E4%BA%BA%E5%91%98%E8%AF%A6%E6%83%85/u3503.png"
+                style=" height:50px">
             </el-form-item>
           </el-form>
         </div>
@@ -44,49 +45,50 @@
       <el-main style="margin-left: 2%">
         <p style="margin-bottom: 30px">造访单位信息：</p>
         <div class="rightFormBox">
-          <el-form :model="rightFormData" label-width="120px" :inline="true" :rules="rules">
+          <el-form :model="VisitorDetail" label-width="120px" :inline="true" required>
             <el-row>
-              <el-col :span="12">
-                <el-form-item label="造访类型：" prop="type">
-                  <el-select>
+              <el-col :span="11">
+                <el-form-item label="造访类型：" required>
+                  <el-select v-model="VisitorDetail.type" disabled>
                     <el-option label="企业" value="enterprise" />
                     <el-option label="租户" value="apartment" />
                   </el-select>
                 </el-form-item>
               </el-col>
-              <el-col :span="12">
-                <el-form-item label="单位名称:" prop="companyName">
-                  <el-input v-model="rightFormData.companyName" />
+              <el-col :span="13">
+                <el-form-item label="单位名称：" required>
+                  <el-input v-model="VisitorDetail.company" disabled />
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="12">
-                <el-form-item label="负责人姓名:" prop="principal">
-                  <el-input v-model="rightFormData.principal" disabled />
+              <el-col :span="11">
+                <el-form-item label="负责人姓名：" required>
+                  <el-input v-model="VisitorDetail.director" disabled />
                 </el-form-item>
               </el-col>
-              <el-col :span="12">
-                <el-form-item label="联系方式:" prop="phone">
-                  <el-input v-model="rightFormData.phone" disabled />
+              <el-col :span="13">
+                <el-form-item label="联系方式：" prop="phone" required>
+                  <el-input v-model="VisitorDetail.directorPhone" disabled />
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="12">
-                <el-form-item label="所属楼宇:" prop="Building">
-                  <el-input v-model="rightFormData.Building" disabled />
+              <el-col :span="11">
+                <el-form-item label="所属楼宇：" required>
+                  <el-input v-model="VisitorDetail.Building" disabled />
                 </el-form-item>
               </el-col>
-              <el-col :span="12">
-                <el-form-item label="房间名称:" prop="roomNum">
-                  <el-input v-model="rightFormData.roomNum" disabled />
+              <el-col :span="13">
+                <el-form-item label="房间名称：" required>
+                  <el-input v-model="VisitorDetail.roomNun" disabled />
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-form-item label="造访时间:">
+            <el-form-item label="造访时间：" required>
               <el-date-picker v-model="value2" type="datetimerange" start-placeholder="请选择造访开始时间"
-                end-placeholder="请选择造访结束时间" :default-time="defaultTime2" />
+                end-placeholder="请选择造访结束时间" disabled />
+
             </el-form-item>
           </el-form>
         </div>
@@ -105,63 +107,75 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "@vue/reactivity";
+import { reactive, ref, toRaw } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import { ElMessageBox } from "element-plus";
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
+
+//引入useStore
+import { useStore } from 'vuex'
+const store = useStore()
 const route = useRoute();
 
 const $router = useRouter();
-onMounted(() => {
-  //字符串转换为对象
-  console.log("能获取到吗?", JSON.parse(route.params.rowData));
-  // 然后统一赋值就可以了 后面没写********************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-});
+// onMounted(() => {
+//字符串转换为对象
+// console.log("能获取到吗?", JSON.parse(route.params.rowData));
+// 获取点击详情传过来的id
+let id = JSON.parse(route.params.rowData)
+// 传给vuex的 查询数据的方法
+store.dispatch('property/visitorDetail', id)
+console.log('vueX的详情数据', toRaw(store.state.property.VisitorDetail[0][0]));
 
-const leftFormData = reactive({
-  userName: "",
-  phone: "",
-  sex: "",
-  Education: "",
-  WeChat: "lxw19920211",
-  photo: "",
-});
-// 表单验证规则
-const rules = {
-  userName: [
-    {
-      required: true,
-      message: "请输入用户名",
-      trigger: "blur",
-    },
-  ],
-  phone: { required: true, message: "请输入联系方式", trigger: "blur" },
-  sex: { required: true, message: "请选择性别", trigger: "blur" },
-  WeChat: { required: true, message: "请输入绑定微信", trigger: "blur" },
-  photo: { required: true, message: "请上传人脸照片", trigger: "blur" },
-  type: { required: true, message: "请选择造访类型", trigger: "blur" },
-  companyName: { required: true, message: "请输入单位名称", trigger: "blur" },
-  principal: { required: true, message: "请输入负责人姓名", trigger: "blur" },
-  Building: { required: true },
-};
+// vueX的对象
+const FormData = reactive(toRaw(store.state.property.VisitorDetail[0][0]))
 
-// 来访单位信息 表单数据
-const rightFormData = reactive({
-  type: "",
-  companyName: "",
-  principal: "张小强",
-  phone: "18767234658",
-  Building: "A1幢",
-  roomNum: "502",
-});
+// 页面需要的其他默认参数
+const FormOtherData = {
+  director: '张小强',
+  directorPhone: '18767234658',
+  roomNun: '502',
+  Building: 'A1幢'
+}
+// 合并对象
+const VisitorDetail = Object.assign(FormData, FormOtherData);
+
+
+
+
+
+
+
+
+
+// });
+
+// const VisitorDetail = reactive({
+//   userName: "",
+//   phone: "",
+//   sex: "",
+//   Education: "",
+//   WeChat: "lxw19920211",
+//   photo: "",
+//   type: "",
+//   companyName: "",
+//   principal: "张小强",
+//   phone: "18767234658",
+//   Building: "A1幢",
+//   roomNum: "502",
+// });
+
+
+
+
 
 // 时间相关的属性
-let value2 = ref("");
-const defaultTime2 = [
-  new Date(2000, 1, 1, 12, 0, 0),
-  new Date(2000, 2, 1, 8, 0, 0),
-]; // '12:00:00', '08:00:00'
+let value2 = [
+  new Date(VisitorDetail.time),
+  new Date(VisitorDetail.endTime),
+]
+
 
 // 点击关闭按钮的处理事件
 const close = () => {
@@ -219,7 +233,7 @@ const close = () => {
 .leftFormBox {
   border: 1px solid #000;
   width: 100%;
-  height: 70%;
+  height: 85%;
   border-radius: 10px;
   padding: 5%;
   font-size: 20px;
@@ -229,14 +243,15 @@ const close = () => {
 .rightFormBox {
   padding: 5%;
   width: 100%;
-  height: 70%;
+  height: 85%;
   border-radius: 10px;
 
   border: 1px solid #000;
 }
 
 .buttonBox {
-  bottom: 10%;
-
+  bottom: 5%;
 }
 </style>
+
+

@@ -28,8 +28,9 @@
             </el-select>
           </el-form-item>
 
+
           <el-form-item>
-            <el-button type="primary">查询</el-button>
+            <el-button type="primary" @click="serch">查询</el-button>
             <el-button type="info">重置</el-button>
           </el-form-item>
         </el-form>
@@ -39,47 +40,106 @@
       <el-table :data="tableData" style="width: 100%" border>
         <!-- 多选框 -->
         <el-table-column type="selection" />
-        <el-table-column prop="name" label="访客姓名" width="100" />
-        <el-table-column prop="phone" label="联系方式" width="150" />
-        <el-table-column prop="carNum" label="车牌号码" width="100" />
-        <el-table-column prop="carModel" label="车辆型号" width="200" />
-        <el-table-column prop="carType" label="车辆类型" width="100" />
-        <el-table-column prop="beginTime" label="开始时间" />
-        <el-table-column prop="overTime" label="结束时间" />
+        <el-table-column prop="ownerName" label="车主姓名" />
+        <el-table-column prop="ownerPhone" label="联系方式" />
+        <el-table-column prop="carNumber" label="车牌号码" />
+        <el-table-column prop="carVersion" label="车辆型号" />
+        <el-table-column prop="carType" label="车辆类型" />
+        <el-table-column prop="startTime" label="开始时间" />
+        <el-table-column prop="endTime" label="结束时间" />
         <el-table-column label="操作">
           <template v-slot="scope">
             <el-link :underline="false" @click="open(scope.row)">详情</el-link>
-            <el-link :underline="false" style="margin-left: 50px">删除</el-link>
+            <!--  @confirm 点击确定的处理程序  携带这一行的信息-->
+            <el-popconfirm confirm-button-text="确定" cancel-button-text="取消" title="您要删除此条信息吗?"
+              @confirm="deleteCarHandler(scope.row)">
+              <template #reference>
+                <el-link :underline="false" style="margin-left: 50px">删除</el-link>
+              </template>
+            </el-popconfirm>
+
+            <!-- <el-link :underline="false" style="margin-left: 50px" @click="deleteCarHandler(scope.row)">删除</el-link> -->
           </template>
         </el-table-column>
       </el-table>
       <!-- 分页组件 -->
-      <MyPaginationVue></MyPaginationVue>
+      <MyPaginationVue :total="count"></MyPaginationVue>
     </el-main>
   </el-container>
 </template>
 
 <script setup>
 import { useRouter } from "vue-router";
+import { onMounted, reactive, ref } from "vue";
 import MyPaginationVue from "../../../components/MyPagination.vue";
+import { ElMessage } from 'element-plus'
+// 接口
+import { getCar, deleteCar } from "../../../api/property";
 
-// 引入请求的接口
+//引入useStore
+import { useStore } from 'vuex'
+//执行useStore函数
+const store = useStore();
 
-import { reactive } from "vue";
 
-// 定义表数据对象
-const tableData = reactive([]);
 // 使用路由
 const $router = useRouter();
-// 点击新增路由跳转
 
+
+// 车辆列表数据
+let tableData = reactive([])
+
+// 车辆列表总数
+let count = ref(0)
+
+
+// 获取汽车列表数据需要的参数
+let Parms = {
+  page: '1',   // 获取第几页的数据
+  limit: '50'   // 获取几条数据
+}
+
+// 获取车辆的异步函数
+async function getCarData() {
+  // 发送请求 接受请求回来的数据 并且重命名为 res  传入参数
+  const { data: res } = await getCar(Parms)
+  // 返回的数据展开 push到数组中
+  tableData.push(...res.data)
+  // 总数重新赋值
+  count.value = res.count
+  // 保存到vueX
+  store.commit('property/saveCarInfo', res.data);
+  // console.log('vueX保存的Car数据', store.state.property.CarInfo);
+}
+
+// 调用车辆的函数
+getCarData()
 
 
 //添加汽车的方法
 function addCar() {
   // 跳转页面
-  $router.replace({ path: "/property/addCar" });
+  $router.push({ path: "/property/addCar" });
 }
+//点击删除的处理函数 接收当前行的数据
+const deleteCarHandler = async (row) => {
+  // 发送请求 把这一行的id传过去
+  let res = await deleteCar(row.ownerId)
+  if (res.data === true) {
+    ElMessage({
+      showClose: true,
+      message: '删除成功',
+      type: 'success',
+    })
+    // 列表数据清空
+    tableData.splice(0, tableData.length)
+    // 重新获取数据
+    getCarData()
+  }
+}
+
+
+
 
 
 // 打开详情页 接收传过来的参数
@@ -89,7 +149,7 @@ function open(row) {
     name: "carDetails",
     // 参数传过去
     params: {
-      //  独享转换为字符串
+      //  转换为字符串
       rowData: JSON.stringify(row),
     },
   });

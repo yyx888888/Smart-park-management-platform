@@ -14,28 +14,28 @@
       <el-aside style="width: 40%">
         <p style="margin-bottom: 30px">车主基本信息：</p>
         <div class="leftFormBox">
-          <el-form label-width="120px" :model="leftFormData" style="max-width: 460px" :rules="rules">
+          <el-form label-width="120px" :model="FormData" style="max-width: 460px" :rules="rules">
             <el-form-item label="车主姓名：" prop="name">
-              <el-input v-model="leftFormData.name" disabled />
+              <el-input v-model="FormData.ownerName" disabled />
             </el-form-item>
             <el-form-item label="联系方式：" prop="phone">
-              <el-input oninput="value=value.replace(/[^\d.]/g,'')" v-model="leftFormData.phone" disabled
+              <el-input oninput="value=value.replace(/[^\d.]/g,'')" v-model="FormData.ownerPhone" disabled
                 placeholder="请输入联系方式" />
             </el-form-item>
             <el-form-item label="人员性别：" prop="sex">
-              <el-select style="width: 100%" v-model="leftFormData.sex" clearable disabled>
+              <el-select style="width: 100%" v-model="FormData.sex" clearable disabled>
                 <el-option label="男" value="male" />
                 <el-option label="女" value="female" />
               </el-select>
             </el-form-item>
             <el-form-item label="单位名称" prop="companyName">
-              <el-input v-model="leftFormData.building" disabled />
+              <el-input v-model="FormData.ownerCompany" disabled />
             </el-form-item>
             <el-form-item label="所属楼宇" prop="Building">
-              <el-input v-model="leftFormData.Building" disabled />
+              <el-input v-model="FormData.ownerBuilding" disabled />
             </el-form-item>
             <el-form-item label="房间名称" prop="roomNum">
-              <el-input v-model="leftFormData.roomNum" disabled />
+              <el-input v-model="FormData.ownerRoomName" disabled />
             </el-form-item>
             <el-form-item label="人脸照片" prop="roomNum">
               <img
@@ -49,11 +49,11 @@
       <el-main style="margin-left: 2%">
         <p style="margin-bottom: 30px">车辆基本信息：</p>
         <div class="rightFormBox">
-          <el-form :model="rightFormData" label-width="120px" :inline="true" :rules="rules">
+          <el-form :model="FormData" label-width="120px" :inline="true" :rules="rules">
             <el-row>
               <el-col :span="12">
                 <el-form-item label="车辆类型： ">
-                  <el-select v-model="rightFormData.carType" clea>
+                  <el-select v-model="FormData.carType" clea>
                     <el-option label="临时车" value="temp" />
                     <el-option label="包月车" value="month" />
                     <el-option label="园区车" value="park" />
@@ -62,31 +62,31 @@
               </el-col>
               <el-col :span="12">
                 <el-form-item label="车牌号码：" prop="companyName">
-                  <el-input v-model="rightFormData.carNum" disabled />
+                  <el-input v-model="FormData.carNumber" disabled />
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="12">
                 <el-form-item label="车辆品牌：" prop="carBrands">
-                  <el-input v-model="rightFormData.carBrands" disabled />
+                  <el-input v-model="FormData.carBrands" disabled />
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item label="车辆型号：" prop="carModel">
-                  <el-input v-model="rightFormData.carModel" disabled />
+                  <el-input v-model="FormData.carModel" disabled />
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="12">
                 <el-form-item label="开始时间：" prop="beginTime">
-                  <el-input v-model="rightFormData.beginTime" disabled />
+                  <el-input v-model="FormData.startTime" disabled />
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item label="结束时间：" prop="overTime">
-                  <el-input v-model="rightFormData.overTime" disabled />
+                  <el-input v-model="FormData.endTime" disabled />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -124,25 +124,38 @@ import { onMounted } from "@vue/runtime-core";
 import { reactive, ref } from "@vue/reactivity";
 import { ElMessageBox } from "element-plus";
 import { useRouter, useRoute } from "vue-router";
+import { toRaw } from '@vue/reactivity'
 const $router = useRouter();
 const route = useRoute();
 
-onMounted(() => {
-  //字符串转换为对象
-  console.log("能获取到吗?", JSON.parse(route.params.rowData));
-  // 然后统一赋值就可以了 后面没写********************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-});
+// 表单数据
+let FormData = {};
 
-const leftFormData = reactive({
-  name: "",
-  phone: "18767234658",
-  sex: '男',
-  companyName: "",
-  principal: "张小强",
-  building: '杭州久拓咨询有限公司',
-  Building: "A1幢",
-  roomNum: "502",
-});
+//字符串转换为对象
+console.log("能获取到吗?", JSON.parse(route.params.rowData));
+// 获取到传过来的参数
+let row = JSON.parse(route.params.rowData)
+// 赋值给表单 
+FormData = row
+// 
+
+console.log('有数据吗', FormData);
+
+
+
+// 点击关闭按钮的处理事件
+const close = () => {
+  ElMessageBox.confirm("您确认关闭此页面吗？", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "warning",
+  })
+    .then(() => {
+      // 点击确定
+      $router.push("/property/CarInfo");
+    })
+    .catch(() => { });
+};
 // 表单验证规则
 const rules = {
   userName: [
@@ -160,38 +173,8 @@ const rules = {
   beginTime: { required: true, message: "请输入结束时间", trigger: "blur" },
   carModel: { required: true, message: "请输入车辆型号", trigger: "blur" },
   carBrands: { required: true, message: "请输入车牌号码", trigger: "blur" },
-
-
   Building: { required: true },
   roomNum: { required: true }
-};
-
-// 来访单位信息 表单数据
-const rightFormData = reactive({
-  carType: '',
-  carNum: '豫A00FX2',
-  carBrands: '宝马',
-  carModel: '2020款 2.5L 无级 尊贵版',
-  beginTime: '2022/9/8',
-  overTime: '2022/9/10'
-
-
-});
-
-
-
-// 点击关闭按钮的处理事件
-const close = () => {
-  ElMessageBox.confirm("您确认关闭此页面吗？", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
-    type: "warning",
-  })
-    .then(() => {
-      // 点击确定
-      $router.push("/property/CarInfo");
-    })
-    .catch(() => { });
 };
 </script>
 
